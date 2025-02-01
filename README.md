@@ -1,4 +1,4 @@
-# SYMFONY_TEKUP_PROJECT
+# Symfony-app-project-managment
 
 
 
@@ -15,14 +15,14 @@ Already a pro? Just edit this README.md and make it your own. Want to make it ea
 
 ```
 cd existing_repo
-git remote add origin https://gitlab.com/Moetezbf/symfony_tekup_project.git
+git remote add origin https://gitlab.com/moetezbf1/symfony-app-project-managment.git
 git branch -M main
 git push -uf origin main
 ```
 
 ## Integrate with your tools
 
-- [ ] [Set up project integrations](https://gitlab.com/Moetezbf/symfony_tekup_project/-/settings/integrations)
+- [ ] [Set up project integrations](https://gitlab.com/moetezbf1/symfony-app-project-managment/-/settings/integrations)
 
 ## Collaborate with your team
 
