@@ -1,0 +1,107 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Log in{% endblock %}
+
+{% block stylesheets %}
+<!-- Add any specific stylesheets you need -->
+{% endblock %}
+
+{% block body %}
+<section class="vh-100 gradient-custom">
+  <div class="container h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+        <div class="card bg-dark text-white" style="border-radius: 1rem;">
+          <div class="card-body p-5 text-center">
+
+            <div id="form-container" class="mb-md-5 mt-md-4 pb-5">
+
+              <h2 id="form-title" class="fw-bold mb-2 text-uppercase">Login</h2>
+              <p id="form-description" class="text-white-50 mb-5">Please enter your login and password!</p>
+
+              {% for message in app.flashes('error') %}
+                  <div class="alert alert-danger">
+                      {{ message }}
+                  </div>
+              {% endfor %}
+
+              <form method="post" id="auth-form">
+                <input type="text" name="isRegister" value="0" id="isRegisterInput" style="display:none;" />
+                <div class="form-outline form-white mb-4">
+                  <label class="fw-bold mb-1 text" for="typeEmailX">Email</label>
+                  <input type="email" id="typeEmailX" name="email" value="{{ last_username }}"
+                         class="form-control form-control-lg" autocomplete="email" required autofocus />
+                </div>
+
+                <div class="form-outline form-white mb-4">
+                  <label class="fw-bold mb-1 text" for="typePasswordX">Password</label>
+                  <input type="password" id="typePasswordX" name="password" class="form-control form-control-lg" autocomplete="current-password" required />
+                </div>
+
+                <!-- Input pour la vérification du mot de passe (caché par défaut) -->
+                <div class="form-outline form-white mb-4" id="confirm-password-group" style="display: none;">
+                  <label class="fw-bold mb-1 text" for="typePasswordConfirmX">Confirm Password</label>
+                  <input type="password" id="typePasswordConfirmX" name="confirm_password" class="form-control form-control-lg" autocomplete="new-password" />
+                </div>
+
+                <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}" />
+                <input type="hidden" name="recaptchaResponse" id="recaptchaResponse" />
+
+                <!-- Lien pour mot de passe oublié (caché en mode inscription) -->
+                <p class="small mb-5 pb-lg-2" id="forgot-password-link">
+                  <a class="text-white-50" href="#!">Forgot password?</a>
+                </p>
+                
+                <div>
+                  <!-- Bouton de connexion ou d'inscription -->
+                  <button class="btn btn-outline-light btn-lg px-5" type="submit" id="auth-button">Login</button>
+                </div>
+              </form>
+            </div>
+
+            <!-- Lien pour basculer entre les modes -->
+            <div>
+              <p id="toggle-form-link" class="mb-0">
+                Don't have an account? <a href="#!" class="text-white-50 fw-bold" onclick="toggleFormMode()">Sign Up</a>
+              </p>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  function toggleFormMode() {
+    const isRegisterInput = document.getElementById("isRegisterInput");
+    const confirmPasswordGroup = document.getElementById("confirm-password-group");
+    const authButton = document.getElementById("auth-button");
+
+    // Basculer entre Login et Register
+    const isRegister = isRegisterInput.value === "0"; // Vérifie si on passe en mode Register
+    isRegisterInput.value = isRegister ? "1" : "0";
+
+    // Changer le titre et la description
+    document.getElementById('form-title').textContent = isRegister ? 'Register' : 'Login';
+    document.getElementById('form-description').textContent = isRegister
+        ? 'Please enter your email and choose a password!'
+        : 'Please enter your login and password!';
+
+    // Afficher ou cacher le champ de confirmation de mot de passe
+    confirmPasswordGroup.style.display = isRegister ? "block" : "none";
+
+    // Cacher ou afficher le lien "Forgot password?"
+    document.getElementById('forgot-password-link').style.display = isRegister ? "none" : "block";
+
+    // Modifier le texte du bouton
+    authButton.textContent = isRegister ? "Register" : "Login";
+
+    // Modifier le texte du lien pour basculer entre les modes
+    document.getElementById('toggle-form-link').innerHTML = isRegister
+        ? 'Have an account? <a href="#!" class="text-white-50 fw-bold" onclick="toggleFormMode()">Login</a>'
+        : 'Don\'t have an account? <a href="#!" class="text-white-50 fw-bold" onclick="toggleFormMode()">Sign Up</a>';
+  }
+</script>
+{% endblock %}
