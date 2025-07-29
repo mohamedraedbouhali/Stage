@@ -10,9 +10,13 @@ class AppFixtures extends Fixture
 {
     public function load(ObjectManager $manager): void
     {
-        // $product = new Product();
-        // $manager->persist($product);
-        UserFactory::createMany(1);
+        // Only create RH1 user
+        \App\Factory\UserFactory::new()->create([
+            'email' => 'RH1@gmail.com',
+            'roles' => ['ROLE_RH'],
+            'password' => password_hash('rh', PASSWORD_BCRYPT),
+            'name' => 'RH1 User',
+        ]);
         $manager->flush();
     }
 }

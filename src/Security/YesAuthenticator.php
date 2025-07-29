@@ -83,13 +83,17 @@ class YesAuthenticator extends AbstractLoginFormAuthenticator
 
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $firewallName): ?Response
     {
-        // Si l'utilisateur vient de s'inscrire
-        if ($request->request->get('isRegister')) {
-            return new RedirectResponse($this->router->generate('admin'));
+        $user = $token->getUser();
+        if ($user instanceof \App\Entity\User) {
+            if (in_array('ROLE_RH', $user->getRoles(), true)) {
+                return new RedirectResponse($this->router->generate('rh_dashboard'));
+            }
+            if (in_array('ROLE_ADMIN', $user->getRoles(), true)) {
+                return new RedirectResponse($this->router->generate('admin_dashboard'));
+            }
         }
-    
-        // Sinon, comportement normal après connexion
-        return new RedirectResponse($this->router->generate('admin'));
+        // Default: admin dashboard
+        return new RedirectResponse($this->router->generate('admin_dashboard'));
     }
     
     protected function getLoginUrl(Request $request): string

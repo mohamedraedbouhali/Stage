@@ -2,13 +2,24 @@
 
 namespace App\Message;
 
-final class RappelDeadline
+class RappelDeadline
 {
-    public function __construct(private int $id)
+    private int $projectId;
+    private \DateTimeInterface $deadline;
+
+    public function __construct(int $projectId, \DateTimeInterface $deadline)
     {
+        $this->projectId = $projectId;
+        $this->deadline = $deadline;
     }
-    public function getId(): int
+
+    public function getProjectId(): int
     {
-        return $this->id;
+        return $this->projectId;
     }
-}
+
+    public function getDeadline(): \DateTimeInterface
+    {
+        return $this->deadline;
+    }
+} 
