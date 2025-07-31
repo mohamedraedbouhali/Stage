@@ -26,17 +26,17 @@ class Opportunity
     #[ORM\Column(type: 'integer')]
     private ?int $value = null;
 
-    #[ORM\Column(type: 'integer')]
+    #[ORM\Column(type: 'integer', nullable: true)]
     private ?int $probability = null;
-
-    #[ORM\Column(type: 'string', length: 50)]
-    private ?string $status = null;
 
     #[ORM\Column(type: 'date')]
     private ?\DateTimeInterface $closeDate = null;
 
     #[ORM\Column(type: 'text', nullable: true)]
     private ?string $description = null;
+
+    #[ORM\Column(type: 'string', length: 50, nullable: false)]
+    private ?string $status = null;
 
     #[ORM\ManyToOne(targetEntity: User::class)]
     private ?User $createdBy = null;
@@ -102,19 +102,6 @@ class Opportunity
     public function setProbability(?int $probability): self
     {
         $this->probability = $probability;
-
-        return $this;
-    }
-
-    public function getStatus(): ?string
-    {
-        return $this->status;
-    }
-
-    public function setStatus(?string $status): self
-    {
-        $this->status = $status;
-
         return $this;
     }
 
@@ -126,7 +113,6 @@ class Opportunity
     public function setCloseDate(?\DateTimeInterface $closeDate): self
     {
         $this->closeDate = $closeDate;
-
         return $this;
     }
 
@@ -139,6 +125,17 @@ class Opportunity
     {
         $this->description = $description;
 
+        return $this;
+    }
+
+    public function getStatus(): ?string
+    {
+        return $this->status;
+    }
+
+    public function setStatus(?string $status): self
+    {
+        $this->status = $status;
         return $this;
     }
 

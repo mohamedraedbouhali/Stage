@@ -3,27 +3,15 @@
 {% block stylesheets %}
 <style>
     body {
-        background: linear-gradient(135deg, #e0ecff 0%, #fffbe0 100%);
+        background: linear-gradient(135deg, #009FE3 0%, #F9B233 100%) !important;
         min-height: 100vh;
         position: relative;
     }
     body::before {
-        content: '';
-        position: fixed;
-        top: 0; left: 0; right: 0; bottom: 0;
-        z-index: 0;
-        pointer-events: none;
-        opacity: 0.13;
-        background-image: repeating-linear-gradient(135deg, #009FE3 0 2px, transparent 2px 40px), repeating-linear-gradient(45deg, #F9B233 0 2px, transparent 2px 40px);
+        display: none !important;
     }
     .profile-container {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        min-height: 100vh;
-        background: linear-gradient(120deg, #e0ecff 0%, #fffbe0 100%);
-        position: relative;
-        z-index: 1;
+        background: none !important;
     }
     .profile-card {
         background: rgba(255,255,255,0.82);

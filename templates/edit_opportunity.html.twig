@@ -89,21 +89,6 @@
             <input type="number" id="opportunityValue" name="opportunityValue" min="0" value="{{ opportunity.value }}" required>
         </div>
         <div class="form-group">
-            <label for="probability">Probability (%)</label>
-            <input type="number" id="probability" name="probability" min="0" max="100" value="{{ opportunity.probability }}" required>
-        </div>
-        <div class="form-group">
-            <label for="status">Status</label>
-            <select id="status" name="status" required>
-                <option value="nouveau" {% if opportunity.status == 'nouveau' %}selected{% endif %}>New</option>
-                <option value="qualification" {% if opportunity.status == 'qualification' %}selected{% endif %}>Qualification</option>
-                <option value="proposition" {% if opportunity.status == 'proposition' %}selected{% endif %}>Proposal</option>
-                <option value="negociation" {% if opportunity.status == 'negociation' %}selected{% endif %}>Negotiation</option>
-                <option value="ferme-gagne" {% if opportunity.status == 'ferme-gagne' %}selected{% endif %}>Closed-Won</option>
-                <option value="ferme-perdu" {% if opportunity.status == 'ferme-perdu' %}selected{% endif %}>Closed-Lost</option>
-            </select>
-        </div>
-        <div class="form-group">
             <label for="closeDate">Expected Close Date</label>
             <input type="date" id="closeDate" name="closeDate" value="{{ opportunity.closeDate ? opportunity.closeDate|date('Y-m-d') : '' }}" required>
         </div>

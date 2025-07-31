@@ -68,7 +68,6 @@
                                 <div class="opportunity-company">{{ opp.company }}</div>
                             </div>
                             <div class="opportunity-actions">
-                                <span class="status-badge">{{ opp.status|replace({'nouveau':'New','qualification':'Qualification','proposition':'Proposal','negociation':'Negotiation','ferme-gagne':'Closed-Won','ferme-perdu':'Closed-Lost'}) }}</span>
                                 <form method="post" action="{{ path('rh_delete_opportunity', {'id': opp.id}) }}" style="display:inline;">
                                     <button type="submit" class="btn-delete" title="Delete this opportunity">🗑️</button>
                                 </form>
@@ -85,16 +84,9 @@
                                 <span class="detail-value value-amount">{{ opp.value }}</span>
                             </div>
                             <div class="detail-item">
-                                <span class="detail-label">📈 Probability:</span>
-                                <span class="detail-value">{{ opp.probability }}%</span>
-                            </div>
-                            <div class="detail-item">
-                                <span class="detail-label">📅 Expected Close:</span>
+                                <span class="detail-label">📅 Deadline:</span>
                                 <span class="detail-value">{{ opp.closeDate ? opp.closeDate|date('Y-m-d') : '' }}</span>
                             </div>
-                        </div>
-                        <div class="probability-bar">
-                            <div class="probability-fill" style="width: {{ opp.probability }}%"></div>
                         </div>
                         <p style="margin-top: 15px; color: #666; line-height: 1.5;">{{ opp.description }}</p>
                     </div>
@@ -123,26 +115,7 @@
                 <input type="text" id="contactPerson" name="contactPerson" required>
             </div>
             <div class="form-group">
-                <label for="opportunityValue">Value (€)</label>
-                <input type="number" id="opportunityValue" name="opportunityValue" min="0" required>
-            </div>
-            <div class="form-group">
-                <label for="probability">Probability (%)</label>
-                <input type="number" id="probability" name="probability" min="0" max="100" value="25" required>
-            </div>
-            <div class="form-group">
-                <label for="status">Status</label>
-                <select id="status" name="status" required>
-                    <option value="nouveau">New</option>
-                    <option value="qualification">Qualification</option>
-                    <option value="proposition">Proposal</option>
-                    <option value="negociation">Negotiation</option>
-                    <option value="ferme-gagne">Closed-Won</option>
-                    <option value="ferme-perdu">Closed-Lost</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="closeDate">Expected Close Date</label>
+                <label for="closeDate">Deadline</label>
                 <input type="date" id="closeDate" name="closeDate" required>
             </div>
             <div class="form-group">

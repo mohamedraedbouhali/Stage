@@ -64,7 +64,7 @@ class SecurityController extends AbstractController
             }
             $em->flush();
             $this->addFlash('success', 'Profile updated successfully!');
-            return $this->redirectToRoute('rh_dashboard');
+            return $this->redirectToRoute('profile');
         }
         // Remove password change logic from here (will move to a separate route)
         // Handle remove profile picture
